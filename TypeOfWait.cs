@@ -14,7 +14,7 @@ namespace FlagmanShop_Test
         {
             try
             {
-                new WebDriverWait(webDriver, TimeSpan.FromSeconds(3)).Until(ExpectedConditions.UrlContains(location));
+                new WebDriverWait(webDriver, TimeSpan.FromSeconds(2)).Until(ExpectedConditions.UrlContains(location));
             }
             catch (WebDriverTimeoutException ex)
             {
@@ -22,7 +22,7 @@ namespace FlagmanShop_Test
             }
         }
 
-        public static void WaitInterval(int second = 1) // указываем время ожидание
+        public static void WaitInterval(int second = 3) // указываем время ожидание
         {
             Task.Delay(TimeSpan.FromSeconds(second)).Wait();
         }
