@@ -18,14 +18,14 @@ namespace FlagmanShop_Test.PageObjects
             this.webdriver = webdriver;
         }
 
-        public HomePage AddGoodsInBasket()
+        public void AddGoodsInBasket()
         {
             ((IJavaScriptExecutor)webdriver).ExecuteScript("scroll(0,600)");
             webdriver.FindElement(_BuutonAddGoodInBasket).Click();
-            webdriver.FindElement(_ContinueShoping).Click();
+            webdriver.FindElement(_ContinueShoping).Click();            
             webdriver.FindElement(_ButtonExit).Click();
-            Assert.AreEqual("2", webdriver.FindElement(_NumberOfGoodsInBasket).Text);
-            return new HomePage(webdriver);
+            TypeOfWait.WaitInterval(1);
+            Assert.AreEqual("1", webdriver.FindElement(_NumberOfGoodsInBasket).Text);
 
         }
     }

@@ -20,11 +20,8 @@ namespace FlagmanShop_Test.PageObjects
         {
             ((IJavaScriptExecutor)webdriver).ExecuteScript("scroll(0,400)");
             webdriver.FindElement(_AddRodCarpProMethodInBasket).Click();
-            TypeOfWait.WaitInterval(1);
-            Assert.IsTrue(webdriver.FindElement(By.XPath("//div[@class='popup light-popup popup-cart']")).Displayed);
-            webdriver.FindElement(_ContinueShoping).Click();
-            Assert.AreEqual("1", webdriver.FindElement(By.XPath("//div/a/span[text()='1']")).Text);
-            
+            TypeOfWait.WaitInterval(1);                    
+            webdriver.FindElement(_ContinueShoping).Click();          
         }
     }
 }

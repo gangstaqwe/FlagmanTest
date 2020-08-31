@@ -17,7 +17,6 @@ namespace FlagmanShop_Test.PageObjects
         }
         public PageLure PageCatalogLure()
         {
-            Assert.IsTrue(webdriver.FindElement(By.XPath("//img [@src='https://i.flagman.kiev.ua/goods/1280/1280741.png']")).Displayed);
             webdriver.FindElement(_ButtonLureInCatalog).Click();
             return new PageLure(webdriver);
         }

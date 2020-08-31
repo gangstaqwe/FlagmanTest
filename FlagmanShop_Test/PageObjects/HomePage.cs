@@ -47,57 +47,39 @@ namespace FlagmanShop_Test.PageObjects
             this.webdriver = webdriver;
         }
         
-        public void CheckTopAndBotDispalyed()
-        {
-            String html_registration = "Войти с паролем";
-            Assert.IsTrue(webdriver.PageSource.Contains(html_registration)); // содержит html элемент
-
-            Assert.IsTrue(webdriver.FindElement(_MenuHitsSale).Displayed); // проверка что меню "Подпис на новости " отображается
-             
-            Assert.IsTrue(webdriver.FindElement(_FooterDisplayed).Displayed); // проверка на то что футер дисплайед
-
-            Assert.IsTrue(webdriver.FindElement((_SearchField)).Enabled); // проверка на то что кнопка Поиска активна
-        }
+       
         public List<string> AllTheTopTab =>
             webdriver.FindElements(_AllTabInTop).Select(x => x.Text).ToList(); //получаем список из 8 вкладок (верх)
 
-
-        public void CheckDisplayedTabHitsSale()
-        {
-            string TextFollowByNews = "Подписаться на новости ";
-            TypeOfWait.WaitInterval(3);
-
-            Assert.IsTrue(webdriver.FindElement(_HitsSaleText).Displayed); // проверяю что есть елемент Хиты продаж
-
-            Assert.IsTrue(webdriver.FindElement(_HitsOfSaleWithDiscount).Displayed); // Хиты продаж со скидками чек
-
-            Assert.IsTrue(webdriver.FindElement(_TabNew).Displayed); // новости 
-
-            Assert.IsTrue(webdriver.PageSource.Contains(TextFollowByNews)); // проверка на оо что страница содержит этот текст
-        }
         public List<string> TabsInformationBottom =>
             webdriver.FindElements(_BottomBoxInformation).Select(x => x.Text).ToList(); //получаем список из 8 вкладок (боттом)
 
 
-        public void CheckClickableAndVisibleSocialNetwork()
+        public void CheckClickableAndVisibleSocialNetworkFacebook()
         {
             var m_driver = webdriver.WindowHandles;
-           
             webdriver.FindElement(_IconFacebook).Click();
             webdriver.SwitchTo().Window(m_driver.First()); // перехожу между page
             string actualhrefFace = webdriver.FindElement(_IconFacebook).GetAttribute("href"); // получаю юрл из фейсбук
-            Assert.AreEqual(actualhrefFace, TestSettings.FacebookUrl); // проверяю что мой текущ юрл соответст юрл в тестсетингс
+            Assert.AreEqual(actualhrefFace, TestSettings.FacebookUrl);
+        }// проверяю что мой текущ юрл соответст юрл в тестсетингс
 
-            webdriver.FindElement(_IconInstagram).Click();
-            webdriver.SwitchTo().Window(m_driver.First()); // переход на пред страницу
-            string actualhrefInst = webdriver.FindElement(_IconInstagram).GetAttribute("href");
-            Assert.AreEqual(actualhrefInst, TestSettings.InstaUlr);
+        public void CheckClickableAndVisibleSocialNetworkInstagram()
+        {
+                var m_driver = webdriver.WindowHandles;
+                webdriver.FindElement(_IconInstagram).Click();
+                webdriver.SwitchTo().Window(m_driver.First()); // переход на пред страницу
+                string actualhrefInst = webdriver.FindElement(_IconInstagram).GetAttribute("href");
+                Assert.AreEqual(actualhrefInst, TestSettings.InstaUlr);
+        }
 
+        public void CheckClickableAndVisibleSocialNetworkTelegram()
+        {
+            var m_driver = webdriver.WindowHandles;
             webdriver.FindElement(_IconTelegram).Click();
             webdriver.SwitchTo().Window(m_driver.First()); // на пред страницу
             string actualhrefTel = webdriver.FindElement(_IconTelegram).GetAttribute("href");
             Assert.AreEqual(actualhrefTel, TestSettings.TelegaramUrl);
-
         }
 
         /*public void ChooseLanguage()

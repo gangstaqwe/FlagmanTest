@@ -8,14 +8,7 @@ namespace FlagmanShop_Test
     [TestFixture]
     public class Tests:BaseClass
     {
-
-        [Test]
-        public void HomePageTabDisplayed()
-        {
-            var homePage = new HomePage(webdriver);
-            homePage
-                .CheckTopAndBotDispalyed();
-        }
+        private readonly By _NumberOfGoodsInBasket = By.XPath("//a[@class='icon header-cart full-cart']/span");
 
         [Test]
         public void CheckTabsInTopSite()
@@ -23,14 +16,7 @@ namespace FlagmanShop_Test
             var homePage = new HomePage(webdriver);
             Assert.That(homePage.AllTheTopTab, Has.Member("Акции")); // проверка текста в списке елементов (что то не работает) получаю Empty           
         }
-        [Test]
-        public void CheckDisplayedHomeTabs()
-        {
-            var homePage = new HomePage(webdriver);
-            homePage
-                .CheckDisplayedTabHitsSale();
-        }
-
+    
         [Test]
         public void CheckBottomBoxInformation()
         {
@@ -41,14 +27,32 @@ namespace FlagmanShop_Test
             
         }
         [Test]
-        public void CheckSocialNetworkBox()
+        public void CheckSocialNetworkFacebook()
         {
             var homePage = new HomePage(webdriver);
             homePage
-                .CheckClickableAndVisibleSocialNetwork();
-            
+                .CheckClickableAndVisibleSocialNetworkFacebook();           
             //Assert.IsTrue
         }
+
+        [Test]
+        public void CheckSocialNetworkInstagram()
+        {
+            var homePage = new HomePage(webdriver);
+            homePage
+                .CheckClickableAndVisibleSocialNetworkInstagram();
+            //Assert.IsTrue
+        }
+
+        [Test]
+        public void CheckSocialNetworkTelegram()
+        {
+            var homePage = new HomePage(webdriver);
+            homePage
+                .CheckClickableAndVisibleSocialNetworkTelegram();
+            //Assert.IsTrue
+        }
+
         /*[Test]
         public void ChechChooselanguage()
         {
@@ -75,8 +79,7 @@ namespace FlagmanShop_Test
             var homePage = new HomePage(webdriver);
             homePage
                 .EntryInAccount();
-            Assert.IsTrue(webdriver.FindElement(By.XPath("//a [@name='profile']")).Displayed);
-            Assert.IsTrue(webdriver.FindElement(By.CssSelector("li a[class='xhr']")).Displayed);
+            Assert.IsTrue(webdriver.FindElement(By.XPath("//a [@name='profile']")).Displayed);          
             // проверка что обьекты отображаются
         }
 
@@ -89,9 +92,8 @@ namespace FlagmanShop_Test
                 .GoToRegistrationAndEntryWithPass()
                 .PageEntryWithPass();
             Assert.IsTrue(webdriver.FindElement(By.XPath("//a [@name='profile']")).Displayed);
-            Assert.IsTrue(webdriver.FindElement(By.CssSelector("li a[class='xhr']")).Displayed);
-
         }
+
          [Test]
          public void CheckFieldSearch()
          {          
@@ -100,8 +102,6 @@ namespace FlagmanShop_Test
             homePage
                 .FieldSearch();
             Assert.AreEqual("«КРЮЧКИ»", webdriver.FindElement(By.XPath("//span[text()='«крючки»']")).Text); // проверка на на то что текст соотвутствует
-            Assert.IsTrue(webdriver.FindElement(By.XPath("//div[@class='row search-results-sort']")).Displayed); // блок должен отображаться
-            //Assert.IsTrue(webdriver.FindElement(By.XPath("//span[text()='«крючки»']")).Text.Contains(e));
         }
 
          [Test]
@@ -120,12 +120,14 @@ namespace FlagmanShop_Test
             var catalogLure = new CatalogLure(webdriver);
             var pageLure = new PageLure(webdriver);
             homePage
-                .ClickToCatalogAndLure(); // на главной стр
+                .ClickToCatalogAndLure();
+            Assert.IsTrue(webdriver.FindElement(By.XPath("//img [@src='https://i.flagman.kiev.ua/goods/1280/1280741.png']")).Displayed);// на главной стр
             catalogLure
-                .PageCatalogLure(); // переход на стр прикормки
+                .PageCatalogLure();           
             pageLure
                 .PageWithDifferentProductLure(); // стр каталог товаров прикормки
-                
+            // add Assert
+           
         }
         [Test]
         public void CheckThenGoodsNotDeleteAfterQuitAcc()
@@ -134,6 +136,10 @@ namespace FlagmanShop_Test
             var page_Fish_Rod = new Page_Fish_Rod(webdriver);
             homePage
                 .EntryInAccClickBySpinning();
+            // add Assert
+            page_Fish_Rod
+                .AddGoodsInBasket();
+            Assert.AreEqual("1", webdriver.FindElement(_NumberOfGoodsInBasket).Text);
         }
         
 
