@@ -6,7 +6,7 @@ using System.Text;
 
 namespace FlagmanShop_Test.PageObjects
 {
-    class Page_Fish_Rod
+    public class Page_Fish_Rod
     {
         private IWebDriver webdriver;
         private readonly By _BuutonAddGoodInBasket = By.XPath("//*[@id='goods-parent']/div/div[9]/div/article/div[3]/ul/li[3]/a");

@@ -7,12 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading;
 
 namespace FlagmanShop_Test.PageObjects
 {    
-    class HomePage
+    public class HomePage
     {
         private IWebDriver webdriver;
         
@@ -40,7 +41,10 @@ namespace FlagmanShop_Test.PageObjects
         private readonly By _ButtonLure = By.XPath("//ul/li[2]/a[2]"); // плохой xpath, можно было ссылку вписать
         private readonly By _ButtonSpinningsInTopMenu = By.XPath("//ul[@class='main-menu']/li[2]");
         private readonly By _ButtonSpinningRod = By.XPath("//div[text()='Спиннинговые удилища']");
-        
+        private readonly By _ButtonContacts = By.XPath("//ul[@class='header-top_menu clearfix']/li[5]");
+
+
+
 
         public HomePage(IWebDriver webdriver)
         {
@@ -49,28 +53,33 @@ namespace FlagmanShop_Test.PageObjects
         
        
         public List<string> AllTheTopTab =>
-            webdriver.FindElements(_AllTabInTop).Select(x => x.Text).ToList(); //получаем список из 8 вкладок (верх)
+            webdriver.FindElements(_AllTabInTop).Select(x => x.Text).ToList();
+            
+        //получаем список из 8 вкладок (верх)
+
+        
 
         public List<string> TabsInformationBottom =>
             webdriver.FindElements(_BottomBoxInformation).Select(x => x.Text).ToList(); //получаем список из 8 вкладок (боттом)
-
-
+        
+       
         public void CheckClickableAndVisibleSocialNetworkFacebook()
-        {
+        {     
             var m_driver = webdriver.WindowHandles;
             webdriver.FindElement(_IconFacebook).Click();
             webdriver.SwitchTo().Window(m_driver.First()); // перехожу между page
             string actualhrefFace = webdriver.FindElement(_IconFacebook).GetAttribute("href"); // получаю юрл из фейсбук
             Assert.AreEqual(actualhrefFace, TestSettings.FacebookUrl);
+            
         }// проверяю что мой текущ юрл соответст юрл в тестсетингс
 
         public void CheckClickableAndVisibleSocialNetworkInstagram()
         {
-                var m_driver = webdriver.WindowHandles;
-                webdriver.FindElement(_IconInstagram).Click();
-                webdriver.SwitchTo().Window(m_driver.First()); // переход на пред страницу
-                string actualhrefInst = webdriver.FindElement(_IconInstagram).GetAttribute("href");
-                Assert.AreEqual(actualhrefInst, TestSettings.InstaUlr);
+             var m_driver = webdriver.WindowHandles;
+             webdriver.FindElement(_IconInstagram).Click();
+             webdriver.SwitchTo().Window(m_driver.First()); // переход на пред страницу
+             string actualhrefInst = webdriver.FindElement(_IconInstagram).GetAttribute("href");
+             Assert.AreEqual(actualhrefInst, TestSettings.InstaUlr);
         }
 
         public void CheckClickableAndVisibleSocialNetworkTelegram()
@@ -121,11 +130,10 @@ namespace FlagmanShop_Test.PageObjects
         public EntryWithPassword GoToRegistrationAndEntryWithPass()
         {
             webdriver.FindElement(_ButtonRegistration).Click();
-            webdriver.FindElement(By.CssSelector(".popup-content .xhr")).Click();
-            return new EntryWithPassword(webdriver);
-            
+            webdriver.FindElement(By.CssSelector(".popup-content .xhr")).Click();            
+            return new EntryWithPassword(webdriver);          
         }
-
+        
         public void FieldSearch()
         {
             webdriver.FindElement(_FieldSearch).SendKeys("крючки"); // можно сдеалть отдельний класс для выбора конкретного слова поиска (пока так)
@@ -142,16 +150,21 @@ namespace FlagmanShop_Test.PageObjects
             webdriver.FindElement(_ButtonCatalog).Click();
             webdriver.FindElement(_ButtonLure).Click();
             return new CatalogLure(webdriver);
-
+            
         }
-
+        
         public Page_Fish_Rod EntryInAccClickBySpinning()
         {
             EntryInAccount();
             webdriver.FindElement(_ButtonSpinningsInTopMenu).Click();
             webdriver.FindElement(_ButtonSpinningRod).Click();
             return new Page_Fish_Rod(webdriver);
+        }
 
+        public PageContacts GoToContacts()
+        {
+            webdriver.FindElement(_ButtonContacts).Click();
+            return new PageContacts(webdriver);
         }
     }
 }

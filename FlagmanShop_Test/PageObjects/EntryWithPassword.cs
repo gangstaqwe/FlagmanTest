@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FlagmanShop_Test.PageObjects
 {
-    class EntryWithPassword
+    public class EntryWithPassword
     {
 
         private readonly By _FieldPhone = By.XPath("//input [@id='u_phone']");

@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace FlagmanShop_Test.PageObjects
 {
-    class PageLure
+    public class PageLure
     {
         private IWebDriver webdriver;
         private readonly By _AddRodCarpProMethodInBasket = By.XPath("//*[@id='goods-parent']/div[1]/div[3]/div/article/div[2]/ul/li[3]");

@@ -27,12 +27,15 @@ namespace FlagmanShop_Test
             Task.Delay(TimeSpan.FromSeconds(second)).Wait();
         }
 
-        public static void WaitElement(IWebDriver webDriver, By locator, int second = 2)
+        public static void WaitElement(IWebDriver webDriver, By locator,int second=0)
         {
-            new WebDriverWait(webDriver, TimeSpan.FromSeconds(second)).Until(ExpectedConditions.ElementIsVisible(locator)); // проверка стал ли видим едемент за 2 с
-            new WebDriverWait(webDriver, TimeSpan.FromSeconds(second)).Until(ExpectedConditions.ElementToBeClickable(locator));// проверка стал ли кликабелен еемент за 2 с
+            //new WebDriverWait(webDriver, TimeSpan.FromSeconds(second)).Until(ExpectedConditions.ElementIsVisible(locator)); // проверка стал ли видим елемент за 2 с
+            //(можно создать новый метод для этого ожидания)
+            
+            new WebDriverWait(webDriver, TimeSpan.Zero).Until(ExpectedConditions.ElementToBeClickable(locator));// проверка стал ли кликабелен елмент за 2 с
 
         }
         
+
     }
 }

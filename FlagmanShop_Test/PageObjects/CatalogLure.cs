@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 
 namespace FlagmanShop_Test.PageObjects
 {
-    class CatalogLure
+    public class CatalogLure
     {
         private IWebDriver webdriver;
         private readonly By _ButtonLureInCatalog = By.XPath("//a [text()='Прикормка']");

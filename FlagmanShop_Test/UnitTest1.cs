@@ -14,7 +14,8 @@ namespace FlagmanShop_Test
         public void CheckTabsInTopSite()
         {
             var homePage = new HomePage(webdriver);
-            Assert.That(homePage.AllTheTopTab, Has.Member("Акции")); // проверка текста в списке елементов (что то не работает) получаю Empty           
+            Assert.That(homePage.AllTheTopTab, Has.Member("Акции"));
+            // проверка текста в списке елементов (что то не работает) получаю Empty           
         }
     
         [Test]
@@ -51,6 +52,8 @@ namespace FlagmanShop_Test
             homePage
                 .CheckClickableAndVisibleSocialNetworkTelegram();
             //Assert.IsTrue
+            
+
         }
 
         /*[Test]
@@ -140,8 +143,39 @@ namespace FlagmanShop_Test
             page_Fish_Rod
                 .AddGoodsInBasket();
             Assert.AreEqual("1", webdriver.FindElement(_NumberOfGoodsInBasket).Text);
+
         }
-        
+        [Test]
+       public void CheckAreClickableElementWithContactsEmail()
+        {
+            var homePage = new HomePage(webdriver);
+            var pageContacts = new PageContacts(webdriver);
+            homePage
+                .GoToContacts();
+            pageContacts
+                .CheckClicableElementEmail();
+        }
+        [Test]
+        public void CheckAreClickableElementWithContactsViber()
+        {
+            var homePage = new HomePage(webdriver);
+            var pageContacts = new PageContacts(webdriver);
+            homePage
+                .GoToContacts();
+            pageContacts
+                .CheckClicableElementViber();
+        }
+        [Test]
+        public void CheckAreClickableElementWithContactsTelegram()
+        {
+            var homePage = new HomePage(webdriver);
+            var pageContacts = new PageContacts(webdriver);
+            homePage
+                .GoToContacts();
+            pageContacts
+                .CheckClicableElementTelegram();
+        }
+
 
     }
 }
